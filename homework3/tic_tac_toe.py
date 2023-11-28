@@ -41,7 +41,19 @@ def game_step(index, char):
     return True
 def check_win():
     """Функция отслеживания победы"""
-    return False
+    win = False
+
+    win_combination = (
+        (0, 1, 2), (3, 4, 5), (6, 7, 8),    # горизонтальные линии
+        (0, 3, 6), (1, 4, 7), (2, 5, 8),    # вертикальные линии
+        (0, 4, 8), (2, 4, 6),               # диагональные линии
+    )
+
+    for pos in win_combination:
+        if (board[pos[0]] == board[pos[1]] and board[pos[1]] == board[pos[2]]):
+            win = board[pos[0]]
+
+    return win
 
 def validate_index(index, player):
     not_ready = True
@@ -74,7 +86,7 @@ def start_game():
                 break
         if (game_step(index, current_player)):
             print('Ход принят!')
-            
+
             if (current_player == 'X'):
                 current_player = 'O'
             else:

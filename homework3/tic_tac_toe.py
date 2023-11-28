@@ -21,7 +21,17 @@ board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 def draw_board():
     """Функция отрисовки игрового поля"""
-    pass
+    # print('_' + ('_' * 4) * board_side)
+    # for i in range(board_side):
+    #     print('|' + (' ' * 3 + '|')*3)
+    #     print('|', board[i * 3], '|', board[1 + i * 3], '|', board[2 + i * 3], '|') 
+    #     print('|' + ('_' * 3 + '|') * board_side)
+    
+    print(('_' * 4) * board_side)
+    for i in range(board_side):
+        print((' ' * 3 + '|')*3)
+        print('', board[i * 3], '|', board[1 + i * 3], '|', board[2 + i * 3], '|') 
+        print(('_' * 3 + '|') * board_side)
 
 def game_step():
     """Функция для выполнения шага игры"""

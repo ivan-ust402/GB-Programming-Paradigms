@@ -33,10 +33,12 @@ def draw_board():
     #     print('', board[i * 3], '|', board[1 + i * 3], '|', board[2 + i * 3], '|') 
     #     print(('_' * 3 + '|') * board_side)
 
-def game_step():
+def game_step(index, char):
     """Функция для выполнения шага игры"""
-    pass
-
+    if (board[index - 1] in ('X', 'O')):
+        return False
+    board[index - 1] = char
+    return True
 def check_win():
     """Функция отслеживания победы"""
     return False
@@ -55,7 +57,7 @@ def validate_index(index, player):
             index = (input(f'Ходит игрок {player}. Введите номер ячейки (0 - выход из игры): '))
         else:
             not_ready = False
-    return index
+    return int(index)
 
 def start_game():
     # Текущий игрок
@@ -67,10 +69,21 @@ def start_game():
     while (current_step < len(board) + 1) and (check_win() == False):
         index = input(f'Ходит игрок {current_player}. Введите номер ячейки (0 - выход из игры): ')
         index = validate_index(index, current_player)
-        if (int(index) == 0):
+        if (index == 0):
                 print("Игра завершена!")
                 break
-        current_step += 1
+        if (game_step(index, current_player)):
+            print('Ход принят!')
+            
+            if (current_player == 'X'):
+                current_player = 'O'
+            else:
+                current_player = 'X'
+
+            draw_board()
+            current_step += 1
+        else: 
+            print('Ячейка занята! Выберите другую')
         
 print('Добро пожаловать в игру "Крестики-нолики"')
 start_game()

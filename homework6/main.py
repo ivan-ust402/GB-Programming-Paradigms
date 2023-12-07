@@ -14,3 +14,28 @@
 # число. На выходе - индекс элемента или -1, в случае если искомого
 # элемента нет в массиве.
 
+sorted_list = [1, 3, 4, 6, 7, 8, 10, 13, 14]
+
+target_value = 13
+
+def binary_search(list, value):
+    middle_index = len(list) // 2
+    min_index = 0
+    max_index = len(list) - 1
+    while list[middle_index] != value and min_index <= max_index:
+        if value > list[middle_index]:
+            min_index = middle_index + 1
+        else:
+            max_index = middle_index - 1
+        middle_index = (min_index + max_index) // 2
+        # print('middle_index = ', middle_index)
+        # print('min_index = ', min_index)
+        # print('max_index = ', max_index)
+    if (min_index > max_index):
+        return -1
+    else:
+        return middle_index
+    
+print('Search index =', binary_search(sorted_list, target_value))
+
+# При выполнении работы были использованы императивный (последовательность команд и вызовов процедур, набор инструкций), структурный (есть циклы и ветвления, goto отсутствует) и процедурный (использование функций) подходы.
